@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prise de Rendez-vous</title>
+    <!-- Intégration de Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Intégration de Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="bg-cover bg-center fixed top-0 left-0 w-full h-full z-0" style="background-image: url('{% static 'images/Default_Je_dsire_une_image_raliste_en_4K_avec_une_ambiance_ver_1.jpg' %}'); filter: blur(10px);"></div>
+    
+    {% include "menu.html" %}
+    
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="max-w-lg w-full bg-white p-8 rounded-lg shadow-lg relative z-10">
+            <h2 class="text-2xl font-bold text-center mb-8">Prise de Rendez-vous</h2>
+            
+            <form action="{% url 'create_reservation' %}" method="POST" class="space-y-4">
+                {% csrf_token %}
+                <div class="flex flex-col space-y-2">
+                    <label for="date_reservation" class="text-sm font-medium">Date de réservation:</label>
+                    <div class="relative">
+                        <input type="text" class="form-input w-full" id="date_reservation" name="date_reservation" placeholder="Sélectionner une date" required />
+                        <span class="absolute right-0 top-0 mt-2 mr-2">
+                            <i class="far fa-calendar-alt"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="flex flex-col space-y-2">
+                    <label for="heure_debut" class="text-sm font-medium">Heure de début:</label>
+                    <div class="relative">
+                        <select class="form-input w-full" id="heure_debut" name="heure_debut" required>
+                            <option value="">Sélectionner l'heure de début</option>
+                            <option value="08:00">08:00</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <!-- Ajouter plus d'options selon vos besoins -->
+                        </select>
+                        <span class="absolute right-0 top-0 mt-2 mr-2">
+                            <i class="far fa-clock"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="flex flex-col space-y-2">
+                    <label for="heure_fin" class="text-sm font-medium">Heure de fin:</label>
+                    <div class="relative">
+                        <select class="form-input w-full" id="heure_fin" name="heure_fin" required>
+                            <option value="">Sélectionner l'heure de fin</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <!-- Ajouter plus d'options selon vos besoins -->
+                        </select>
+                        <span class="absolute right-0 top-0 mt-2 mr-2">
+                            <i class="far fa-clock"></i>
+                        </span>
+                    </div>
+                <input type="hidden" id="utilisateur" name="utilisateur" value="{{ request.user.id }}">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Réserver</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            flatpickr("#date_reservation", {
+                enableTime: false,
+                dateFormat: "Y-m-d",
+                minDate: "today"
+            });
+
+            flatpickr("#heure_debut, #heure_fin", {
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: "H:i",
+                minTime: "08:00",
+                maxTime: "18:00"
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voir les utilisateurs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-800 text-white min-h-screen">
+            {% include "admin.html" %}
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            <h1 class="text-3xl font-bold mb-8 text-center">Liste Utilisateur</h1>
+            
+            <!-- Affichage du total des utilisateurs -->
+            <div class="mb-4">
+                <h2 class="text-2xl font-bold">Total des utilisateurs: {{ total_users }}</h2>
+            </div>
+
+            <div class="overflow-x-auto">
+                <div class="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
+                    <table class="min-w-full leading-normal">
+                        <thead class="bg-gray-800 text-white">
+                            <tr>
+                                <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Nom</th>
+                                <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Prénom</th>
+                                <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Email</th>
+                                <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Adresse</th>
+                                <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Numéro de téléphone</th>
+                                <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">Date de création</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for user in users %}
+                            <tr class="text-gray-700">
+                                <td class="px-5 py-5 border-b border-gray-200">{{ user.nom }}</td>
+                                <td class="px-5 py-5 border-b border-gray-200">{{ user.prenom }}</td>
+                                <td class="px-5 py-5 border-b border-gray-200">{{ user.email }}</td>
+                                <td class="px-5 py-5 border-b border-gray-200">{{ user.adresse }}</td>
+                                <td class="px-5 py-5 border-b border-gray-200 whitespace-pre-line">{{ user.numero_telephone }}</td>
+                                <td class="px-5 py-5 border-b border-gray-200">{{ user.created_at }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Graphique des utilisateurs par mois (si nécessaire) -->
+            <div class="mt-10">
+                <h2 class="text-2xl font-bold mb-4">Utilisateurs par mois</h2>
+                <canvas id="usersChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script pour Chart.js (si nécessaire) -->
+    <script>
+        // Données dynamiques passées depuis le backend (si nécessaire)
+        var usersByMonth = {{ users_by_month|safe }};
+        
+        var ctx = document.getElementById('usersChart').getContext('2d');
+        var usersChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(usersByMonth),
+                datasets: [{
+                    label: 'Nombre d\'utilisateurs',
+                    data: Object.values(usersByMonth),
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

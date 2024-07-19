@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Responsive Sidebar Menu  | CodingLab </title>
+  
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-c-plus-plus icon'></i>
+        <div class="logo_name">Mwana MBoka</div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+          <i class='bx bx-search' ></i>
+         <input type="text" placeholder="Search...">
+         <span class="tooltip">Search</span>
+      </li>
+      <li>
+        <a href="{% url 'user_liste' %}">
+         <i class='bx bx-user' ></i>
+         <span class="links_name">User</span>
+       </a>
+       <span class="tooltip">User</span>
+     </li>
+     <li>
+       <a href="{% url 'admin_message' %}">
+         <i class='bx bx-chat' ></i>
+         <span class="links_name">Messages</span>
+       </a>
+       <span class="tooltip">Messages</span>
+     </li>
+     <li>
+       <a href="#">
+         <i class='bx bx-pie-chart-alt-2' ></i>
+         <span class="links_name">Analytics</span>
+       </a>
+       <span class="tooltip">Analytics</span>
+     </li>
+     <li>
+       <a href="#">
+         <i class='bx bx-folder' ></i>
+         <span class="links_name">File Manager</span>
+       </a>
+       <span class="tooltip">Files</span>
+     </li>
+     <li>
+      <a href="{% url 'admin_reservation' %}">
+         <i class='bx bx-cart-alt' ></i>
+         <span class="links_name">Reservation</span>
+       </a>
+       <span class="tooltip">Order</span>
+     </li>
+     <li>
+       <a href="#">
+         <i class='bx bx-heart' ></i>
+         <span class="links_name">Saved</span>
+       </a>
+       <span class="tooltip">Saved</span>
+     </li>
+     <li>
+       <a href="#">
+         <i class='bx bx-cog' ></i>
+         <span class="links_name">Setting</span>
+       </a>
+       <span class="tooltip">Setting</span>
+     </li>
+     <li class="profile">
+         <div class="profile-details">
+           <img src="{% static 'images/Capture d\'écran 2024-04-11 200127.png' %}"" alt="profileImg">
+           <div class="name_job">
+             <div class="name">Stephie Luaula</div>
+             <div class="job">President</div>
+           </div>
+         </div>
+         <a href="{% url 'logout' %}">
+          <i class='bx bx-log-out' id="log_out"></i> Logout
+      </a>
+      
+     </li>
+    </ul>
+  </div>
+ 
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();// Appel de la fonction pour changer le bouton (optionnel)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Ouverture de la barre latérale lorsque vous cliquez sur l'icône de recherche
+    sidebar.classList.toggle("open");
+    menuBtnChange(); // Appel de la fonction pour changer le bouton (optionnel)
+  });
+
+  // Fonction pour changer le bouton de la barre latérale (optionnel)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");// Remplacement de la classe des icônes
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");// Remplacement de la classe des icônes
+   }
+  }
+  </script>
+</body>
+</html>

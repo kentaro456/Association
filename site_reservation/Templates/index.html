@@ -1,0 +1,436 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MWANA MBOKA</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <style>
+        .hero-bg {
+    background-image: url('{% static 'images/Default_Je_dsire_une_image_raliste_en_4K_avec_une_ambiance_ver_1.jpg' %}');
+    background-attachment: fixed; /* Parallaxe effect */
+    .transition-transform {
+    transition: transform 0.3s ease-in-out;
+}
+
+}
+
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+  
+    <!-- Header -->
+    <header class="fixed w-full top-0 left-0 z-50 bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-lg transition-transform duration-300 ease-in-out transform hover:-translate-y-1">
+        <nav class="container mx-auto flex justify-between items-center py-4 px-6 navbar-visible">
+            <!-- Logo -->
+            <a href="#" class="flex items-center">
+                <img src="{% static 'images/Capture d\'écran 2024-04-11 200127.png' %}" alt="Logo" class="h-12 w-auto">
+                <span class="text-4xl font-bold ml-3 text-green-400 hover:text-green-300 transition duration-300">MWANA MBOKA</span>
+            </a>
+            <!-- Navigation Links -->
+            <ul class="flex space-x-8 items-center">
+                <li><a href="#about" class="text-gray-100 hover:text-green-300 transition duration-300 py-2 px-4 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300">À Propos</a></li>
+                <li><a href="#services" class="text-gray-100 hover:text-green-300 transition duration-300 py-2 px-4 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300">Nos Services</a></li>
+                <li><a href="#actions" class="text-gray-100 hover:text-green-300 transition duration-300 py-2 px-4 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300">Nos Actions</a></li>
+                <li><a href="#contact" class="text-gray-100 hover:text-green-300 transition duration-300 py-2 px-4 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-green-300">Contact</a></li>
+                <li><a href="#login" id="" class="bg-green-500 text-gray-900 py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-green-300">Se Connecter</a></li>
+                <li><a href="{% url 'inscription_vue' %}" class="bg-green-500 text-gray-900 py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-green-300">S'inscrire</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+
+    <!-- Modal -->
+    <div id="loginModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50 hidden transition-opacity duration-300 ease-in-out">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full relative transform transition-transform duration-300 ease-in-out scale-90 hover:scale-100">
+            <h2 class="text-3xl font-semibold mb-6 text-gray-900">Connexion</h2>
+            <form action="user_login" method="post">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-150 text-gray-900" placeholder="Entrez votre email" required>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Mot de passe</label>
+                    <input type="password" id="password" name="password" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-150 text-gray-900" placeholder="Entrez votre mot de passe" required>
+                </div>
+                <button type="submit" class="bg-green-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-600 transition duration-300">Connexion</button>
+                <button type="button" id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl focus:outline-none">
+                    &times;
+                </button>
+            </form>
+        </div>
+    </div>
+    
+
+    <!-- Hero Section -->
+    <section class="relative h-screen bg-cover bg-center flex items-center justify-center hero-bg"
+    style="background-image: url('{% static 'images/Default_Je_dsire_une_image_raliste_en_4K_avec_une_ambiance_ver_1.jpg' %}');">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <!-- Content -->
+        <div class="relative z-10 text-center text-white px-6 py-12" data-aos="fade-up" data-aos-duration="1500">
+            <h1 id="typewriterText" class="text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500 animate-typewriter">Réservez Votre RDV Médical Facilement</h1>
+            <p class="text-xl mb-8" data-aos="fade-up" data-aos-delay="500">Accédez à des soins de qualité en un clic. Simplifiez vos démarches médicales dès aujourd'hui.</p>
+            <a href="#login" id="openLoginModal" class="bg-green-500 text-gray-900 py-3 px-6 rounded-lg shadow-lg hover:bg-green-600 transition duration-300 hover:shadow-xl">Réservez Maintenant</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-800 text-gray-100">
+        <div class="container mx-auto text-center" data-aos="fade-up" data-aos-duration="1500">
+            <h2 class="text-4xl font-bold mb-8 text-green-400">À Propos de Nous</h2>
+            <p class="text-lg mb-8">Nous sommes ravis de présenter la première maison périnatale en République Démocratique du Congo, dirigée par Stephie Luaula. En tant que pionniers dans ce domaine crucial, nous avons pour mission de transformer l'accès aux soins maternels dans notre pays. En proposant une plateforme de réservation à la fois simple et intuitive, nous visons à rendre les services de santé plus accessibles et plus efficaces pour toutes les familles congolaises.
+
+                Notre engagement va au-delà de la simple fourniture de services : nous cherchons à améliorer la qualité des soins en facilitant la connexion entre les futures mamans et les services essentiels dont elles ont besoin. Dans un pays où l'accès aux soins de santé peut être un défi, notre maison périnatale se distingue par son approche innovante et son processus de réservation simplifié, conçu pour offrir une expérience fluide et rassurante. Nous sommes déterminés à faire une différence significative dans la vie des femmes et des familles de la RDC, en assurant un soutien maternel de qualité dans chaque région.</p>
+            <a href="#signup" class="bg-green-500 text-gray-900 py-3 px-6 rounded-lg shadow-lg hover:bg-green-600 transition duration-300">En Savoir Plus</a>
+        </div>
+        <section id="video" class="py-16 bg-gray-800 text-gray-100">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-8 text-green-400">Découvrez Notre Vidéo</h2>
+                <div class="relative inline-block">
+                    <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FFondationDNT%2Fvideos%2F973416647722099%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                </div>
+            </div>
+        </section>
+        
+
+
+
+    <section id="services" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-10 text-green-500">Nos Services</h2>
+            <swiper-container class="mySwiper"
+                pagination="true"
+                pagination-clickable="true"
+                navigation="true"
+                space-between="30"
+                loop="true"
+                slides-per-view="3">
+                
+                <swiper-slide class="swiper-slide">
+                    <img src="{% static 'images/kiute-5-raisons-la-resa-en-ligne-periode-crise-covid-19.webp' %}" alt="Description Image 3">
+
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">Réservation Facile</h3>
+                    <p class="text-gray-200">Réservez vos rendez-vous médicaux en ligne facilement. Notre plateforme est simple, rapide et sécurisée, vous permettant de planifier vos consultations sans tracas.</p>
+                </swiper-slide>
+
+                <!-- Slide 2 -->
+                <swiper-slide class="swiper-slide">
+                    <img src="{% static 'images/disponibilite-les-precisions-apportees-par-la-loi-de-transformation-de-la-fonction-publique.jpg.webp' %}" alt="Description Image 3">
+
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">Accès 24/7</h3>
+                    <p class="text-gray-200">Profitez d'un accès 24 heures sur 24, 7 jours sur 7 à notre plateforme. Où que vous soyez, connectez-vous à tout moment pour gérer vos rendez-vous médicaux et vos dossiers.</p>
+                </swiper-slide>
+
+                
+                <!-- Slide 4 -->
+                <swiper-slide class="swiper-slide">
+                    <img src="https://i.unimedias.fr/2024/04/17/reeducation-perinee-quelle-methode-choisir.jpg?auto=format%2Ccompress&crop=faces&cs=tinysrgb&fit=crop&h=501&w=890" alt="Rééducation du Périnée">
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">Rééducation du Périnée</h3>
+                    <p class="text-gray-200">Programmes de rééducation personnalisés pour renforcer votre périnée après l'accouchement par voie basse ou césarienne. Idéal pour corriger les fuites urinaires, les envies fréquentes d'uriner, les difficultés à retenir les gaz ou les selles, la pesanteur vaginale, et les douleurs pendant les rapports sexuels.</p>
+                </swiper-slide>
+
+                <!-- Slide 5 -->
+                <swiper-slide class="swiper-slide">
+                    <img src="{% static 'images/Default_Une_femme_noire_enceinte_est_assise_confortablement_da_1.jpg' %}" alt="Description Image 3">
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">Suivi de Grossesse</h3>
+                    <p class="text-gray-200">Assurez un suivi complet et attentif tout au long de votre grossesse. Nos services sont conçus pour garantir votre santé et celle de votre bébé, avec des conseils et des consultations régulières.</p>
+                </swiper-slide>
+
+                <!-- Slide 6 -->
+                <swiper-slide class="swiper-slide"><img src="{% static 'images/Default_Une_femme_noire_enceinte_est_assise_sur_une_chaise_dan_0.jpg' %}" alt="Description Image 3">
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">Consultation Postnatale</h3>
+                    <p class="text-gray-200">Des consultations spécialisées pour vous aider à vous adapter après la naissance de votre bébé. Services inclus : accompagnement post-partum à domicile et soutien à l'allaitement maternel.</p>
+                </swiper-slide>
+
+                <!-- Slide 7 -->
+                <swiper-slide class="swiper-slide">
+                    <img src="{% static 'images/Default_Un_cours_de_prparation_laccouchement_se_droule_dans_u_2.jpg' %}" alt="Description Image 2">
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">Cours de Préparation à l'Accouchement</h3>
+                    <p class="text-gray-200">Préparez-vous mentalement et physiquement à l'accouchement avec nos cours complets. Disponibles en piscine ou en session classique, ils vous aideront à aborder la naissance en toute confiance.</p>
+                </swiper-slide>
+
+                <!-- Slide 8 -->
+                <swiper-slide class="swiper-slide">
+                    <img src="{% static 'images/Default_Bien_sr_Voici_une_description_amliore_pour_limage_que_3.jpg' %}" alt="Description Image 1">
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">Échographies</h3>
+                    <p class="text-gray-200">Nous réalisons des échographies pour la datation de la grossesse (avant 3 mois), la croissance fœtale, le contrôle de stérilet et des échographies pelviennes. Un suivi détaillé et précis pour votre tranquillité d'esprit.</p>
+                </swiper-slide>
+
+                <!-- Slide 9 -->
+                <swiper-slide class="swiper-slide">
+                    <img src="{% static 'images/Default_Une_sance_de_Tecarthrapie_se_droule_dans_un_environnem_2.jpg' %}" alt="Description Image 4">
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">Tecarthérapie 100% Naturelle</h3>
+                    <p class="text-gray-200">Découvrez les bienfaits de la tecarthérapie pour une récupération rapide et naturelle. Idéale pour traiter les douleurs pelviennes (endometriose, douleurs menstruelles) et accélérer la cicatrisation des cicatrices de césarienne, épisiotomie, déchirure, hémorroïdes. Libérez les tensions, améliorez la vascularisation, et réduisez les adhérences, fibroses et contractures.</p>
+                </swiper-slide>
+
+            </swiper-container>
+        </div>
+    </section>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+
+    <script>
+        const swiperEl = document.querySelector('swiper-container');
+
+        const params = {
+            injectStyles: [`
+                .swiper-pagination-bullet {
+                    width: 20px;
+                    height: 20px;
+                    background: rgba(0, 0, 0, 0.2);
+                }
+
+                .swiper-pagination-bullet-active {
+                    background: #007aff;
+                }
+            `],
+            pagination: {
+                clickable: true,
+            },
+            navigation: true,
+            spaceBetween: 30,
+            loop: true,
+            slidesPerView: 3,
+        };
+
+        Object.assign(swiperEl, params);
+
+        swiperEl.initialize();
+    </script>
+  
+       
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+
+
+
+
+
+
+
+
+    <!-- Actions Section -->
+    <section id="actions" class="py-16 bg-gray-800 text-gray-100">
+        <div class="container mx-auto text-center" data-aos="fade-up" data-aos-duration="1500">
+            <h2 class="text-4xl font-bold mb-8 text-green-400">Nos Actions en République Démocratique du Congo</h2>
+            <p class="text-lg mb-8">Le taux de mortalité maternelle est de 850 décès / 100 000 naissances vivantes en 2016. La République Démocratique du Congo est comptée parmi les pays où le taux de mortalité maternelle est le plus élevé du monde. Il y a plus de femmes qui meurent en couches au Congo aujourd’hui qu’en 1990 !</p>
+            <p class="text-lg mb-8">La dégradation des infrastructures, la pénurie d’agents de santé et le manque d’organisation des services ont gravement affaibli le système de santé. Dans certaines zones, l’accès aux soins de santé est très limité, voire inexistant.</p>
+            <p class="text-lg mb-8">Implanter plusieurs maisons périnatales dans chaque province nous permettra de former un maximum de sages-femmes afin que dans chaque région, un accueil pour les mères et futures mères soit présent. Nous développerons une autonomie maternelle, de la femme et du couple. Notre ambition : réduire le taux de mortalité maternelle.</p>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="statistics" class="py-16 bg-gray-900 text-gray-100">
+        <div class="container mx-auto text-center" data-aos="fade-up" data-aos-duration="1500">
+            <h2 class="text-4xl font-bold mb-10 text-green-400">Statistiques de Mortalités Maternelles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">En France</h3>
+                    <p class="text-lg mb-4">1 décès tous les 4 jours d’une cause liée à la grossesse, à l’accouchement ou à leurs suites.</p>
+                    <p class="text-lg mb-4">Les femmes de nationalité étrangère accouchant en France ont 5,5 fois plus de risques.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">En République Démocratique du Congo</h3>
+                    <p class="text-lg mb-4">850 décès sur 100 000 naissances, soit 2 décès tous les jours (chiffres de 2016 de l’UNICEF).</p>
+                    <p class="text-lg mb-4">1 sage-femme pour 10 000 habitants, contre environ 1 pour 200 habitants dans les pays riches en Europe.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Testimonials Section -->
+     <section id="testimonials" class="py-16 bg-gray-900 text-gray-100">
+        <div class="container mx-auto text-center" data-aos="fade-up" data-aos-duration="1500">
+            <h2 class="text-4xl font-bold mb-8 text-green-400">Témoignages</h2>
+            <!-- Swiper -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+<div class="swiper-slide bg-gray-800 p-8 rounded-lg shadow-lg">
+    <p class="text-lg mb-4">"Le service est exceptionnel ! Réserver un rendez-vous n'a jamais été aussi facile et rapide. Je recommande vivement cette plateforme."</p>
+    <p class="font-semibold">Marie D.</p>
+</div>
+<!-- Slide 2 -->
+<div class="swiper-slide bg-gray-800 p-8 rounded-lg shadow-lg">
+    <p class="text-lg mb-4">"Grâce à MWANA MBOKA, j'ai pu obtenir un rendez-vous médical en quelques clics seulement. Un service indispensable pour toutes les mamans."</p>
+    <p class="font-semibold">Jean-Paul K.</p>
+</div>
+<!-- Slide 3 -->
+<div class="swiper-slide bg-gray-800 p-8 rounded-lg shadow-lg">
+    <p class="text-lg mb-4">"Une plateforme très intuitive et facile à utiliser. Les services sont de haute qualité et les médecins sont très professionnels."</p>
+    <p class="font-semibold">Aline M.</p>
+</div>
+<!-- Slide 4 -->
+<div class="swiper-slide bg-gray-800 p-8 rounded-lg shadow-lg">
+    <p class="text-lg mb-4">"Le processus de réservation est simple et rapide. Très satisfait du service offert. Je recommande à tout le monde."</p>
+    <p class="font-semibold">Lucien B.</p>
+</div>
+<!-- Slide 5 -->
+<div class="swiper-slide bg-gray-800 p-8 rounded-lg shadow-lg">
+    <p class="text-lg mb-4">"Un service de réservation en ligne très pratique. La prise en charge est impeccable et les réponses sont rapides."</p>
+    <p class="font-semibold">Sophie G.</p>
+</div>
+<!-- Slide 6 -->
+<div class="swiper-slide bg-gray-800 p-8 rounded-lg shadow-lg">
+    <p class="text-lg mb-4">"J'ai trouvé le rendez-vous que je cherchais en un rien de temps. La plateforme est très facile à utiliser et efficace."</p>
+    <p class="font-semibold">Marc T.</p>
+</div>
+<!-- Slide 7 -->
+<div class="swiper-slide bg-gray-800 p-8 rounded-lg shadow-lg">
+    <p class="text-lg mb-4">"MWANA MBOKA est une vraie révolution dans le domaine médical. Service de qualité et support très réactif."</p>
+    <p class="font-semibold">Claire P.</p>
+</div>
+<!-- Slide 8 -->
+<div class="swiper-slide bg-gray-800 p-8 rounded-lg shadow-lg">
+    <p class="text-lg mb-4">"Une expérience utilisateur exceptionnelle grâce à l'équipe de Stephie Luaula. Le service est au top et très professionnel."</p>
+    <p class="font-semibold">Fatou N.</p>
+</div>
+<!-- Slide 9 -->
+<div class="swiper-slide bg-gray-800 p-8 rounded-lg shadow-lg">
+    <p class="text-lg mb-4">"Stephie Luaula et son équipe offrent un service remarquable. La plateforme est intuitive, et les rendez-vous sont faciles à réserver."</p>
+    <p class="font-semibold">Olivier R.</p>
+</div>
+<!-- Slide 10 -->
+<div class="swiper-slide bg-gray-800 p-8 rounded-lg shadow-lg">
+    <p class="text-lg mb-4">"Je recommande vivement MWANA MBOKA pour sa simplicité et son efficacité. Stephie Luaula et son équipe font un travail exceptionnel."</p>
+    <p class="font-semibold">Nadia L.</p>
+</div>
+
+                </div>
+                <!-- Add Pagination -->
+               
+                <!-- Add Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    
+
+
+ <!-- Section Carte de Contact -->
+<section id="map-section" class="py-16 bg-gray-800 text-gray-100">
+    <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-8 text-green-400">Localisez-nous</h2>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126340.07456501568!2d15.283591773601177!3d-4.319610036843307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19a4c2e7e1b7e1df%3A0x5e4b2a6bb233be31!2s5%20Av.%20Zongo-%20Ntolo%2C%20Kinshasa%2C%20République%20démocratique%20du%20Congo!5e0!3m2!1sen!2sus!4v1685009796371!5m2!1sen!2sus"
+            width="100%"
+            height="400"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</section>
+
+
+   
+
+
+
+   <!-- Section Contact avec Carte -->
+
+   <section id="contact-card-section" class="relative py-16 bg-gray-900 text-gray-100">
+    <div class="container mx-auto text-center">
+        <!-- Effet de Lumière Douce -->
+        <div class="absolute inset-0 -z-10 bg-gradient-to-br from-gray-800 via-gray-900 to-black opacity-30 blur-xl"></div>
+
+        <!-- Carte de Contact -->
+        <div class="relative max-w-md mx-auto bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl border border-gray-700">
+            <!-- Image -->
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL0OtLFHebW0FtaHb_i2hbupFm6wKr-njKIw&s" alt="Sages Femme" class="w-full h-64 object-cover rounded-t-lg">
+
+            <!-- Contenu de la Carte -->
+            <div class="p-6 bg-gray-900">
+                <h2 class="text-3xl font-bold text-green-400 mb-4">Stephie Luaula Sages-Femme</h2>
+                <h2>+243 991 231 210</h2>
+                <p class="text-gray-300 mb-6">Votre partenaire pour des soins maternels de qualité. Notre mission est d'améliorer l'accès aux soins en offrant des services de santé de premier ordre.</p>
+                <a href="mailto:contact@example.com" class="bg-green-500 text-gray-900 py-3 px-6 rounded-lg shadow-lg hover:bg-green-600 transition duration-300">Envoyez-nous un Email</a>
+            </div>
+            
+        <!-- Icônes des Réseaux Sociaux -->
+        <div class="flex justify-center space-x-6 mt-6">
+            <a href="https://www.facebook.com/p/Stephie-Luaula-Sage-femme-61553171362995/?locale=fr_FR" aria-label="Facebook" target="_blank" rel="noopener noreferrer" class="text-gray-200 hover:text-green-400 transition duration-300">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 12.07C22 6.48 17.52 2 12 2S2 6.48 2 12.07c0 5.53 4.48 10.01 10 10.01 1.43 0 2.77-.29 4-1.3v-8.55h-2.73v-2.55h2.73v-1.94c0-2.71 1.65-4.37 4.02-4.37 1.15 0 2.14.08 2.43.12v2.82h-1.66c-1.34 0-1.6.64-1.6 1.58v2.07h3.22l-.42 2.55h-2.8v8.24c1.23.92 2.57 1.22 4 1.22 5.52 0 10-4.48 10-10.01z"/>
+                </svg>
+            </a>
+            <a href="https://www.tiktok.com/@maisonperinatalemm?is_from_webapp=1&sender_device=pc" aria-label="TikTok" target="_blank" rel="noopener noreferrer" class="text-gray-200 hover:text-green-400 transition duration-300">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3.04v7.15c-1.4-.82-2.8-1.89-3.8-3.23-.97-1.32-1.76-2.77-2.3-4.26a.4.4 0 0 0-.1-.1A4.508 4.508 0 0 1 12 3.04zM21.7 7.41c.8 0 1.47-.65 1.47-1.44V3.13c0-.79-.66-1.43-1.47-1.43a1.48 1.48 0 0 0-1.47 1.43v2.84c0 .79.66 1.43 1.47 1.43zM12 13.86v6.35c0 .79-.66 1.43-1.47 1.43a1.48 1.48 0 0 1-1.47-1.43v-6.35c-1.9-1.04-3.52-2.39-4.79-4.01-.89-1.2-1.7-2.44-2.34-3.78-.49-.93-.89-1.87-1.12-2.84-.18-.83-.21-1.68-.02-2.5C2.51 3.48 4.31 2.7 6.27 2.7c.81 0 1.61.16 2.38.47 1.37.51 2.69 1.29 3.83 2.27 1.37 1.22 2.65 2.5 3.66 3.96 1.51 1.95 2.78 4.01 3.72 6.13a13.81 13.81 0 0 0 1.66 3.64z"/>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/maisonperinatalemm?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram" target="_blank" rel="noopener noreferrer" class="text-gray-200 hover:text-green-400 transition duration-300">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.5 2C4.46 2 2 4.46 2 7.5V16.5C2 19.54 4.46 22 7.5 22H16.5C19.54 22 22 19.54 22 16.5V7.5C22 4.46 19.54 2 16.5 2H7.5ZM4 7.5C4 5.01 5.99 3 8.5 3H15.5C18.01 3 20 5.01 20 7.5V16.5C20 18.99 18.01 21 15.5 21H8.5C5.99 21 4 18.99 4 16.5V7.5ZM12 7.5C9.5 7.5 7.5 9.5 7.5 12C7.5 14.5 9.5 16.5 12 16.5C14.5 16.5 16.5 14.5 16.5 12C16.5 9.5 14.5 7.5 12 7.5ZM12 14C10.9 14 10 13.1 10 12C10 10.9 10.9 10 12 10C13.1 10 14 10.9 14 12C14 13.1 13.1 14 12 14ZM15.5 8.5C15.5 9.33 14.83 10 14 10C13.17 10 12.5 9.33 12.5 8.5C12.5 7.67 13.17 7 14 7C14.83 7 15.5 7.67 15.5 8.5Z"/>
+                </svg>
+            </a>
+        </div>
+        </div>
+
+        <!-- Informations Supplémentaires -->
+        <div class="mt-12">
+            <h2 class="text-4xl font-bold mb-8 text-green-400">Contactez-Nous</h2>
+            <p class="text-lg mb-8">Pour toute question ou demande d'information, n'hésitez pas à nous contacter.</p>
+        </div>
+
+    </div>
+</section>
+
+</section>
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-100 py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 MWANA MBOKA. Tous droits réservés.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#about" class="text-gray-400 hover:text-gray-300 transition duration-300">À Propos</a>
+                <a href="#services" class="text-gray-400 hover:text-gray-300 transition duration-300">Services</a>
+                <a href="#contact" class="text-gray-400 hover:text-gray-300 transition duration-300">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script>
+    // Swiper Initialization
+    var swiper = new Swiper('.swiper-container', {
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+            delay: 5000,
+        },
+        effect: 'slide',
+        slidesPerView: 1,
+        spaceBetween: 20,
+    });
+</script>
+   
+</body>
+</html>

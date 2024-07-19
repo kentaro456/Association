@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envoyer un message</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="font-sans bg-gray-100">
+ 
+
+    <div class="relative min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        
+        <!-- Arrière-plan flou -->
+        <div class="fixed inset-0 overflow-hidden z-0">
+            <img src="{% static 'images/Default_Je_dsire_une_image_raliste_en_4K_avec_une_ambiance_ver_1.jpg' %}" alt="Background" class="absolute inset-0 w-full h-full object-cover filter blur-md">
+        </div>
+        {% include "menu.html" %}
+        <!-- Contenu centré -->
+        <div class="z-10 bg-white bg-opacity-80 shadow-md rounded-lg p-6 max-w-md w-full">
+            <h1 class="text-2xl font-bold mb-4 text-center">Envoyer un message</h1>
+            <form method="post" action="{% url 'send_message' %}" class="space-y-4">
+                {% csrf_token %}
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Nom</label>
+                    <input type="text" id="name" name="name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="subject" class="block text-sm font-medium text-gray-700">Sujet</label>
+                    <input type="text" id="subject" name="subject" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                    <textarea id="message" name="message" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+                </div>
+                <input type="hidden" name="user_id" value="{{ request.user.id }}">
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="w-full py-2 px-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Envoyer</button>
+                    <a href="{% url 'message_history' %}" class="py-2 px-4 bg-gray-300 text-gray-700 font-bold rounded hover:bg-gray-400 ml-2 inline-block">Historique des messages</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

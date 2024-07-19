@@ -1,0 +1,236 @@
+/* Styles généraux */
+body {
+    font-family: Arial, sans-serif; /* Définit la police de caractères pour le corps du texte */
+    margin: 0;
+    padding: 0;
+}
+
+/* Menu */
+.menu {
+    background-color: rgba(221, 215, 215, 0.15); /* Couleur de fond du menu avec une légère opacité */
+    color: #fff; /* Couleur du texte */
+    padding: 10px; /* Espace intérieur du menu */
+    text-align: left; /* Alignement du texte à gauche */
+    position: fixed; /* Position fixe pour que le menu reste visible lors du défilement */
+    top: 0; /* Positionne le menu en haut de la fenêtre */
+    width: 100%; /* Le menu prend toute la largeur de la fenêtre */
+    z-index: 1000; /* Empile le menu au-dessus de tout autre contenu */
+}
+
+.menu ul {
+    list-style-type: none; /* Supprime les puces de liste */
+    display: flex; /* Affiche les éléments de la liste horizontalement */
+}
+
+.menu li {
+    margin: 0 10px; /* Marge entre chaque élément de la liste */
+}
+
+.menu .carre {
+    border: 1px solid #fff; /* Bordure autour des éléments de la liste */
+    padding: 5px 10px; /* Espace intérieur des éléments de la liste */
+    border-radius: 5px; /* Arrondit les coins des éléments de la liste */
+}
+
+.menu li:hover {
+    background-color: #555555f3; /* Couleur de fond au survol des éléments de la liste */
+}
+
+/* Cadres */
+.cadre1 {
+    display: flex; /* Affiche les éléments de manière flexible */
+    float: left; /* Flotte l'élément à gauche */
+    width: 80%; /* Largeur de l'élément */
+    height: 131vh; /* Hauteur automatique pour conserver le ratio */
+    background-color: #f0f0f0; /* Couleur de fond du cadre */
+    background-size: cover; /* Ajuste l'image de fond pour couvrir l'élément entier */
+    box-sizing: border-box;
+    position: relative;
+}
+
+.cadre1::before {
+    content: "";
+    background-image: url("{% static 'images/Default_Je_dsire_une_image_raliste_en_4K_avec_une_ambiance_ver_1.jpg' %}");
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(10px);
+}
+
+.mon-image {
+    width: 100%; /* Largeur de l'image */
+    height: auto; /* Hauteur automatique pour conserver le ratio */
+    object-fit: cover; /* Ajuste l'image pour couvrir l'élément entier */
+}
+
+.cadre2 {
+    display: flex; /* Affiche les éléments de manière flexible */
+    flex-direction: column; /* Alignement des éléments en colonne */
+    justify-content: center; /* Centre les éléments verticalement */
+    align-items: center; /* Centre les éléments horizontalement */
+    width: 20%; /* Largeur de l'élément */
+    height: 131vh; /* Hauteur de l'élément en unité de vue de hauteur */
+    background-color: rgba(85, 221, 115, 0.31); /* Couleur de fond du cadre */
+    padding: 20px; /* Espace intérieur du cadre */
+    box-sizing: border-box; /* Inclut les bordures et le rembourrage dans la taille totale de l'élément */
+}
+
+.cadre2 h1 {
+    text-align: center; /* Alignement du texte au centre */
+    margin-bottom: 20px; /* Marge en bas du titre */
+    padding: 30px; /* Espace intérieur du titre */
+    font-weight: 500; /* Poids de la police */
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; /* Police du titre */
+}
+
+.mini-cadre {
+    width: auto; /* Largeur automatique */
+    height: auto; /* Hauteur automatique */
+    background-color: rgba(88, 148, 29, 0.09); /* Couleur de fond du cadre */
+    padding: 50px; /* Espace intérieur du cadre */
+    box-sizing: border-box; /* Inclut les bordures et le rembourrage dans la taille totale de l'élément */
+    margin: 0 auto; /* Centre l'élément horizontalement */
+}
+
+.mini-cadre form {
+    display: flex; /* Affiche les éléments de manière flexible */
+    flex-direction: column; /* Alignement des éléments en colonne */
+}
+
+.mini-cadre form input {
+    margin-bottom: 10px; /* Marge en bas de chaque champ de saisie */
+    padding: 10px; /* Espace intérieur des champs de saisie */
+    border: 1px solid #ccc; /* Bordure autour des champs de saisie */
+}
+
+.mini-cadre form button {
+    background-color: #333; /* Couleur de fond du bouton */
+    color: #fff; /* Couleur du texte du bouton */
+    padding: 10px 20px; /* Espace intérieur du bouton */
+    border: none; /* Supprime la bordure du bouton */
+    cursor: pointer; /* Change le curseur au survol du bouton */
+}
+
+.logo {
+    height: auto; /* Hauteur automatique */
+    padding-bottom: 25px; /* Marge en bas du logo */
+    width: 100%; /* Largeur du logo */
+}
+
+.mini-cadre form button:hover {
+    background-color: #555; /* Couleur de fond au survol du bouton */
+}
+
+.btn-retour {
+    display: block;
+    width: 100px;
+    padding: 10px;
+    margin: 20px auto;
+    text-align: center;
+    text-decoration: none;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.btn-retour:hover {
+    background-color: #555;
+}
+
+/* Media queries pour le responsive */
+@media screen and (max-width: 576px) {
+    .cadre1, .cadre2 {
+        width: 100%; /* Largeur de l'élément à 100% pour s'adapter aux petits écrans */
+        padding: 10px; /* Espace intérieur réduit pour les petits écrans */
+    }
+
+    .menu {
+        padding: 5px; /* Espace intérieur du menu pour les petits écrans */
+    }
+}
+/* Ajoutez ceci dans la balise <style> ou dans votre fichier CSS */
+.cursor {
+    border-right: 0.15em solid #4CAF50;
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #4CAF50; }
+}
+
+
+/* Swiper Styles */
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.swiper-pagination-bullet {
+    background: #4CAF50; /* Couleur des bullets de pagination */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #4CAF50; /* Couleur des boutons de navigation */
+}
+
+.section-padding {
+    padding: 3rem 1.5rem;
+}
+.iframe-container {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 8px;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 50%;
+}
+.text-gray-100 {
+    color: rgba(255, 255, 255, 0.9);
+}
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.swiper-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.swiper-pagination-bullet-active {
+    background: #007aff;
+}
+

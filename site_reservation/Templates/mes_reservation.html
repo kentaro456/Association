@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Réservations</title>
+    <!-- Intégration de Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+   
+    <style>
+       
+        .bg-blur {
+            background-image: url('{% static 'images/Default_Je_dsire_une_image_raliste_en_4K_avec_une_ambiance_ver_1.jpg' %}');
+            background-size: cover;
+            background-position: center;
+            filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+       
+        table {
+            width: 80%;
+            margin: auto;
+            margin-top: 50px;
+            border-collapse: collapse;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .bg-gray-100 {
+            background-color: #f9f9f9;
+        }
+        .empty-message {
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+<body class="font-sans relative">
+    {% include "menu.html" %}
+    <div class="bg-blur"></div>
+   
+
+    <div class="flex items-center justify-center">
+        <h1 class="text-3xl mb-8 text-white">Mes Réservations</h1>
+    </div>
+    
+    {% if reservations %}
+    <div class="max-w-4xl mx-auto">
+        <table class="w-full bg-white shadow-lg rounded-lg overflow-hidden">
+            <thead class="bg-gray-200 text-gray-700">
+                <tr>
+                    <th class="py-2">Date de réservation</th>
+                    <th class="py-2">Heure de début</th>
+                    <th class="py-2">Heure de fin</th>
+                    <th class="py-2">statut</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                <tr class="{% cycle 'bg-gray-100' '' %}">
+                    <td class="py-3">{{ reservation.date_reservation|date:"d/m/Y" }}</td>
+                    <td class="py-3">{{ reservation.heure_debut|time:"H:i" }}</td>
+                    <td class="py-3">{{ reservation.heure_fin|time:"H:i" }}</td>
+                    <td class="px-5 py-5 border-b border-gray-200">{{ reservation.statut.nom }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="py-3 text-center">Aucune réservation trouvée.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="empty-message text-white text-center mt-4">Aucune réservation trouvée.</p>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding-top: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            padding: 10px;
+            font-size: 18px;
+            border-bottom: 1px solid #fff;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar .icon {
+            width: 24px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="{% url 'visiteur' %}" class="flex items-center px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9l9-7 9 7M9 21v-8a2 2 0 012-2h2a2 2 0 012 2v8m-6-9v6"></path>
+            </svg>
+        </a>
+        
+        <ul>
+            <li><a href="{% url 'mon_compte' %}" class="flex items-center px-4 py-2 text-white hover:bg-gray-800 transition duration-300">
+                <i class="fas fa-user icon"></i>
+                <span>Mon compte</span>
+            </a></li>
+            <li><a href="{% url 'mes_reservations' %}" class="flex items-center px-4 py-2 text-white hover:bg-gray-800 transition duration-300">
+                <i class="far fa-calendar icon"></i>
+                <span>Mes rendez-vous</span>
+            </a></li>
+            <li><a href="{% url 's_rev' %}" class="flex items-center px-4 py-2 text-white hover:bg-gray-800 transition duration-300">
+                <i class="far fa-calendar-plus icon"></i>
+                <span>Prendre rendez-vous</span>
+            </a></li>
+            <li>
+                <a href="{% url 'message' %}" class="flex items-center px-4 py-2 text-white hover:bg-gray-800 transition duration-300">
+                    <i class="far fa-envelope icon"></i>
+                    <span>Message</span>
+                </a>
+            </li>
+            
+            <li><a href="{% url 'logout' %}" class="flex items-center px-4 py-2 text-white hover:bg-gray-800 transition duration-300">
+                <i class="fas fa-sign-out-alt icon"></i>
+                <span>Déconnexion</span>
+            </a></li>
+        </ul>
+    </div>
+</body>
+</html>

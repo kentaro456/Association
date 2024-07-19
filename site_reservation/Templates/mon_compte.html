@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/visiteur.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <title>Mon compte</title>
+</head>
+<body class="relative bg-gray-100">
+    
+    <div class="fixed top-0 left-0 w-full h-full bg-cover bg-center filter blur-md z-0" style="background-image: url('{% static 'images/Default_Je_dsire_une_image_raliste_en_4K_avec_une_ambiance_ver_1.jpg' %}');"></div>
+    
+    <!-- Vérifiez ici si le menu s'affiche correctement -->
+    <div class="relative z-10">
+        {% include "menu.html" %}
+    </div>
+    
+    <div class="relative flex items-center justify-center min-h-screen">
+        <div class="bg-white bg-opacity-70 p-8 mt-12 w-4/5 max-w-2xl mx-auto rounded-lg shadow-lg z-10">
+            <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Mon compte</h1>
+            <h3 class="text-lg font-semibold text-gray-700 mb-2">Informations de compte :</h3>
+            <p class="text-gray-600 mb-1"><strong>Nom:</strong> {{ nom }}</p>
+            <p class="text-gray-600 mb-1"><strong>Prénom:</strong> {{ prenom }}</p>
+            <p class="text-gray-600 mb-1"><strong>Email:</strong> {{ email }}</p>
+            <p class="text-gray-600 mb-1"><strong>Adresse:</strong> {{ adresse }}</p>
+            <p class="text-gray-600 mb-1"><strong>Numéro de téléphone:</strong> {{ numero }}</p>
+
+            <!-- Bouton pour modifier les informations -->
+            <div class="text-center mt-6">
+                <a href="{% url 'modifier' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifier les informations</a>
+            </div>
+
+            
+        </div>
+    </div>
+</body>
+</html>

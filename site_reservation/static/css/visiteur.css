@@ -1,0 +1,6 @@
+.content {
+    border: 2px solid #ccc; /* Définit une bordure de 2 pixels solide avec une couleur grise */
+    padding: 20px; /* Ajoute un espace intérieur de 20 pixels pour espacer le contenu du cadre */
+    border-radius: 10px; /* Arrondit les coins du cadre */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ajoute une légère ombre au cadre */
+}

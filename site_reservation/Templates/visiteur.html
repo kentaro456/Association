@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/visiteur.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <title>Page de session</title>
+</head>
+<body class="font-sans relative m-0 p-0">
+    <div class="fixed top-0 left-0 w-full h-full bg-cover bg-center filter blur-md z-0" style="background-image: url('{% static 'images/Default_Je_dsire_une_image_raliste_en_4K_avec_une_ambiance_ver_1.jpg' %}');"></div>
+    <div class="fixed top-0 left-0 w-64 h-full bg-black bg-opacity-80 text-white pt-5 z-10">
+        <h1 class="text-center mb-5 text-white">Menu</h1>
+        {% include "menu.html" %}
+    </div>
+    <div class="ml-64 p-5 bg-white bg-opacity-10 rounded-lg shadow-lg text-center text-lime-500 relative z-10">
+        <h1 class="text-2xl mb-5 text-green-300">Bienvenue sur votre espace personnel</h1>
+        <p class="text-green-600">Bonjour, {{ user_prenom }} {{ user_nom }} !</p>
+        <p class="text-green-600">Nous sommes enchantés de vous accueillir sur notre plateforme.</p>
+    </div>
+</body>
+</html>
